@@ -1,46 +1,41 @@
-id: "opensim"
-# IMPORTANT:
-# - as_token is used by your bridge to authenticate to Synapse.
-# - hs_token is used by Synapse when calling your bridge.
-# Generate long random strings for both (see commands below).
-as_token: "KEY"
-hs_token: "KEY"
+# ============================================================
+# Lighthouse Bridge — AppService Registration
+# ============================================================
+# Register this with Conduit by pasting it in the admin room:
+#
+#   @conduit:lighthouse.neverworldgrid.com: register_appservice
+#   ```
+#   (paste this file contents)
+#   ```
+#
+# Verify with: list_appservices
+# ============================================================
 
-# Where Synapse can reach your bridge daemon
+id: "opensim"
+
+# These must match your config.yaml tokens
+as_token: "CHANGE_ME_SAME_AS_CONFIG"
+hs_token: "CHANGE_ME_SAME_AS_CONFIG"
+
+# Where Conduit sends AppService transactions
+# This must be reachable from Conduit (localhost if same VPS)
 url: "http://127.0.0.1:9009"
 
-# The "bot" user that represents the bridge itself (not puppets)
-# This becomes @opensim_bot:holoneon.com
+# The bot user representing the bridge itself
 sender_localpart: "opensim_bot"
 
 rate_limited: false
 
-# Optional but recommended: require Synapse to use a specific protocol when talking to the bridge
-# (Leave as http if you only bind bridge to localhost or LAN)
-# protocols:
-#   - "http"
-
 namespaces:
   users:
-    # Puppet users owned exclusively by the appservice.
-    # Recommended: UUID-based localparts like @os_<uuidnodashes>:holoneon.com
+    # Puppet users: @os_<32 hex chars>:your.server
+    # These represent OpenSim avatars in Matrix
     - exclusive: true
-      regex: "@os_[0-9a-f]{32}:matrix\\.holoneon\\.com"
-
-    # Optional: allow name-based puppets too (if you ever choose that route)
-    # - exclusive: true
-    #   regex: "@os_[a-z0-9._=-]{3,64}:holoneon\\.com"
+      regex: "@os_[0-9a-f]{32}:lighthouse\\.neverworldgrid\\.com"
 
   aliases:
-    # Room aliases created/owned by the bridge, if you choose to expose them.
-    # Example alias: #os_group_<groupuuidshort>:holoneon.com
+    # Room aliases created by the bridge
     - exclusive: true
-      regex: "#os_.*:matrix\\.holoneon\\.com"
+      regex: "#os_.*:lighthouse\\.neverworldgrid\\.com"
 
   rooms: []
-
-# If your bridge supports ephemeral events (typing, receipts), list them.
-# Most bridges skip these early on.
-# ephemeral: true
-
-

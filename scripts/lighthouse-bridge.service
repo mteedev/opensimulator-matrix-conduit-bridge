@@ -1,0 +1,20 @@
+[Unit]
+Description=Lighthouse Bridge — OpenSim/Matrix Chat Bridge
+After=network.target conduit.service
+
+[Service]
+Type=simple
+User=lighthouse
+WorkingDirectory=/opt/lighthouse-bridge
+ExecStart=/opt/lighthouse-bridge/venv/bin/gunicorn \
+    --bind 127.0.0.1:9009 \
+    --bind 0.0.0.0:9010 \
+    --workers 2 \
+    --timeout 120 \
+    "bridge.app:create_app()"
+Restart=always
+RestartSec=5
+Environment=LIGHTHOUSE_CONFIG=/opt/lighthouse-bridge/config.yaml
+
+[Install]
+WantedBy=multi-user.target

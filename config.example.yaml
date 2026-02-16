@@ -1,0 +1,56 @@
+# ============================================================
+# 🔦 Lighthouse Bridge — Configuration
+# OpenSim ↔ Matrix/Conduit Chat Bridge
+# ============================================================
+# Copy to config.yaml and fill in your values.
+# Generate tokens with: openssl rand -hex 32
+# ============================================================
+
+# --- Matrix Homeserver (Conduit) ---
+matrix:
+  # Internal API URL (Conduit listens here)
+  base_url: "http://127.0.0.1:6167"
+  # Your public server_name (appears in @user:THIS and #room:THIS)
+  homeserver: "lighthouse.neverworldgrid.com"
+  # AppService tokens — must match what you register in Conduit admin room
+  as_token: "CHANGE_ME"
+  hs_token: "CHANGE_ME"
+  # The bot localpart (becomes @opensim_bot:your.server)
+  bot_localpart: "opensim_bot"
+
+# --- OpenSim Connection ---
+opensim:
+  # Shared secret — must match [MatrixBridge] SharedSecret in OpenSim.ini
+  bridge_secret: "CHANGE_ME"
+  # Where OpenSim's region server listens (MatrixGroupInjectModule endpoint)
+  region_url: "http://your-opensim-server:9000"
+
+# --- Bridge Database (MariaDB/MySQL) ---
+database:
+  # This DB holds bridge state AND needs read access to os_groups_* tables
+  host: "127.0.0.1"
+  port: 3306
+  name: "opensim_matrix_bridge"
+  user: "bridge"
+  password: "CHANGE_ME"
+
+# --- Avatar Photos ---
+avatar:
+  # Public URL template for avatar profile pictures
+  # {uuid} is replaced with the avatar's UUID
+  base_url: "https://lighthouse.neverworldgrid.com/av?uuid={uuid}"
+  # Local cache directory for converted avatar images
+  cache_dir: "./data/avpic-cache"
+  # Internal OpenSim asset service URL (for fetching J2K textures)
+  asset_service_url: "http://your-opensim-server:8003"
+
+# --- Bridge Server ---
+server:
+  # AppService listener — Conduit pushes transactions here
+  appservice_port: 9009
+  appservice_host: "127.0.0.1"
+  # OpenSim listener — region server sends events here
+  opensim_port: 9010
+  opensim_host: "0.0.0.0"
+  # Logging
+  log_level: "INFO"
