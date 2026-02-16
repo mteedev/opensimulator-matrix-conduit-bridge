@@ -1,0 +1,46 @@
+id: "opensim"
+# IMPORTANT:
+# - as_token is used by your bridge to authenticate to Synapse.
+# - hs_token is used by Synapse when calling your bridge.
+# Generate long random strings for both (see commands below).
+as_token: "KEY"
+hs_token: "KEY"
+
+# Where Synapse can reach your bridge daemon
+url: "http://127.0.0.1:9009"
+
+# The "bot" user that represents the bridge itself (not puppets)
+# This becomes @opensim_bot:holoneon.com
+sender_localpart: "opensim_bot"
+
+rate_limited: false
+
+# Optional but recommended: require Synapse to use a specific protocol when talking to the bridge
+# (Leave as http if you only bind bridge to localhost or LAN)
+# protocols:
+#   - "http"
+
+namespaces:
+  users:
+    # Puppet users owned exclusively by the appservice.
+    # Recommended: UUID-based localparts like @os_<uuidnodashes>:holoneon.com
+    - exclusive: true
+      regex: "@os_[0-9a-f]{32}:matrix\\.holoneon\\.com"
+
+    # Optional: allow name-based puppets too (if you ever choose that route)
+    # - exclusive: true
+    #   regex: "@os_[a-z0-9._=-]{3,64}:holoneon\\.com"
+
+  aliases:
+    # Room aliases created/owned by the bridge, if you choose to expose them.
+    # Example alias: #os_group_<groupuuidshort>:holoneon.com
+    - exclusive: true
+      regex: "#os_.*:matrix\\.holoneon\\.com"
+
+  rooms: []
+
+# If your bridge supports ephemeral events (typing, receipts), list them.
+# Most bridges skip these early on.
+# ephemeral: true
+
+

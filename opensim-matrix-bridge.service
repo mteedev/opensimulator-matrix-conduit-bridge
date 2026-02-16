@@ -1,0 +1,26 @@
+[Unit]
+Description=OpenSim Matrix Bridge Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=opensim
+Group=opensim
+WorkingDirectory=/opt/opensim-matrix-bridge/publish
+
+ExecStart=/usr/bin/dotnet /opt/opensim-matrix-bridge/publish/opensim-matrix-bridge.dll
+
+Restart=always
+RestartSec=5
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+Environment=DOTNET_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target
+
