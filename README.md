@@ -21,7 +21,7 @@ Lighthouse Bridge connects your OpenSimulator grid's group chat to Matrix rooms 
 | **Language** | C# | Python/Flask |
 | **Matrix Server** | Synapse (1-2GB RAM) | Conduit (128MB RAM) |
 | **Database** | MariaDB + PostgreSQL | MariaDB only |
-| **Hosting** | $6-12/mo VPS | $3/mo VPS |
+| **Hosting** | Heavy VPS | Light VPS |
 
 Same features, fraction of the resources.
 
