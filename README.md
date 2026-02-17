@@ -23,7 +23,7 @@ Lighthouse Bridge connects your OpenSimulator grid's group chat to Matrix rooms 
 | **Database** | MariaDB + PostgreSQL | MariaDB only |
 | **Hosting** | Heavy VPS | Light VPS |
 
-Same features, fraction of the resources.
+Same features, fraction of the resources. And made for folks who may prefer Python/Flask!
 
 ## Quick Start
 
@@ -98,5 +98,5 @@ curl -X POST \
 ## Credits
 
 - **Original bridge**: [Fiona Sweet](mailto:fiona@pobox.holoneon.com) — [opensim-matrix-bridge](https://codeberg.org/fionasweet/opensim-matrix-bridge)
-- **Conduit port**: Shwartzie (Gundahar Bravin) — [Neverworld Grid](https://neverworldgrid.com)
+- **Conduit port**: Gundahar Bravin — [Neverworld Grid](https://neverworldgrid.com)
 - **License**: GPL-3.0 (bridge code) + BSD (OpenSim module, per Fiona's original)
